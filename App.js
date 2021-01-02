@@ -15,6 +15,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 
 import { AuthProvider } from "./src/context/AuthContext"
+import { LocationProvider } from "./src/context/LocationContext"
 
 import { navigationRef } from './src/RootNavigation';
 
@@ -63,7 +64,10 @@ function App() {
 }
 
 export default () => {
-  return <AuthProvider>
-    <App />
-  </AuthProvider>
+  return <LocationProvider>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </LocationProvider>
+
 }
