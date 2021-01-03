@@ -1,47 +1,38 @@
 import "../_mockLocation"
 
-import React, { useEffect, useState, useContext } from "react"
+import React, { useContext } from "react"
 import { StyleSheet, SafeAreaView } from "react-native"
 import { Text } from "react-native-elements"
 
-import { requestPermissionsAsync, watchPositionAsync, Accuracy } from 'expo-location'
+import { useIsFocused } from '@react-navigation/native';
+
+
+import useLocation from "../hooks/useLocation"
 
 import LocationContext from "../context/LocationContext"
+import TrackForm from "../components/TrackForm"
 
 import Map from "../components/Map"
 
 const TrackCreateScreen = () => {
 
-    const { addLocation } = useContext(LocationContext)
-    const [err, setErr] = useState(null)
+    const { addLocation, isRecording } = useContext(LocationContext)
 
-    const startWatching = async () => {
-        try {
-            await requestPermissionsAsync()
+    const isFocused = useIsFocused();
 
-            // tracks user position over time
-            await watchPositionAsync({
-                //more accuracy uses more battery!
-                accuracy: Accuracy.BestForNavigation,
-                // update either ever 10m or 1 second
-                timeInterval: 1000,
-                distanceInterval: 10
-            }, (location) => {
-                addLocation(location)
-            })
-        } catch (e) {
-            setErr(e)
-        }
-    }
+    const [err] = useLocation(isFocused, (location) => {
+        addLocation(location, isRecording)
+    })
 
-    useEffect(() => {
-        startWatching()
-    }, [])
+
+
+
 
     return (<SafeAreaView>
         <Text h2 style={{ textAlign: "center" }}>Create a Track</Text>
         <Map />
         {err ? <Text>Please enable location services</Text> : null}
+        <TrackForm />
     </SafeAreaView>)
 }
 

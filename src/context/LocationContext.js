@@ -10,22 +10,30 @@ export const LocationProvider = ({ children }) => {
     const [isRecording, setIsRecording] = useState(false)
     const [locations, setLocations] = useState([])
     const [currentLocation, setCurrentLocation] = useState(null)
+    const [name, setName] = useState("")
 
-    const startRecording = () => { }
-
-
-    const stopRecording = () => { }
+    const startRecording = () => { setIsRecording(true) }
 
 
-    const addLocation = (location) => {
+    const stopRecording = () => { setIsRecording(false) }
+
+
+    const addLocation = (location, recording) => {
         setCurrentLocation(location)
+        if (recording) {
+            setLocations([...locations, location])
+        }
+    }
+
+    const changeName = (newName) => {
+        setName(newName)
     }
 
 
 
 
     //children being App component, ie all components
-    return <LocationContext.Provider value={{ startRecording, stopRecording, addLocation, currentLocation }}>
+    return <LocationContext.Provider value={{ startRecording, stopRecording, addLocation, changeName, currentLocation, name, isRecording, }}>
         {children}
     </LocationContext.Provider>
 
