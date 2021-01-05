@@ -6,39 +6,47 @@ export default (shouldTrack, callback) => {
 
     const [err, setErr] = useState(null)
 
-    //subscriber option is how we stop watching
-    const [subscriber, setSubscriber] = useState(null)
 
-    const startWatching = async () => {
-        try {
-            await requestPermissionsAsync()
-
-            // tracks user position over time
-            const sub = await watchPositionAsync({
-                //more accuracy uses more battery!
-                accuracy: Accuracy.BestForNavigation,
-                // update either ever 10m or 1 second
-                timeInterval: 1000,
-                distanceInterval: 10
-            }, callback
-            )
-            setSubscriber(sub)
-        }
-        catch (e) {
-            setErr(e)
-        }
-    }
-
-    //anytime shouldTrack changes do something - either start tracking or stop tracking. ShouldTrack is the isFocused booleon. Only tracking user when on that page. 
+    //anytime shouldTrack changes do something - either start tracking or stop tracking. ShouldTrack is the isFocused booleon. Only tracking user when on that page. callback is to stop continually calling startwatching as useeffect would
     useEffect(() => {
+        let subscriber
+        const startWatching = async () => {
+            try {
+                await requestPermissionsAsync()
+
+                // tracks user position over time
+                subscriber = await watchPositionAsync({
+                    //more accuracy uses more battery!
+                    accuracy: Accuracy.BestForNavigation,
+                    // update either ever 10m or 1 second
+                    timeInterval: 1000,
+                    distanceInterval: 10
+                }, callback
+                )
+
+            }
+            catch (e) {
+                setErr(e)
+            }
+        }
+
         if (shouldTrack) {
             startWatching()
         }
         else {
-            subscriber.remove()
-            setSubscriber(null)
+            if (subscriber) {
+                subscriber.remove()
+            }
+            subscriber = null
         }
-    }, [shouldTrack])
+
+        //cleanup function
+        return () => {
+            if (subscriber) {
+                subscriber.remove()
+            }
+        }
+    }, [shouldTrack, callback])
 
     // hooks convention is to return array of values
     return [err]

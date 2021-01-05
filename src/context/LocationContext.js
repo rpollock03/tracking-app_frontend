@@ -14,9 +14,7 @@ export const LocationProvider = ({ children }) => {
 
     const startRecording = () => { setIsRecording(true) }
 
-
     const stopRecording = () => { setIsRecording(false) }
-
 
     const addLocation = (location, recording) => {
         setCurrentLocation(location)
@@ -30,10 +28,8 @@ export const LocationProvider = ({ children }) => {
     }
 
 
-
-
     //children being App component, ie all components
-    return <LocationContext.Provider value={{ startRecording, stopRecording, addLocation, changeName, currentLocation, name, isRecording, }}>
+    return <LocationContext.Provider value={{ startRecording, stopRecording, addLocation, changeName, locations, currentLocation, name, isRecording, }}>
         {children}
     </LocationContext.Provider>
 
