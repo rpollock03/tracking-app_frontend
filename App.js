@@ -16,7 +16,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 import { AuthProvider } from "./src/context/AuthContext"
 import { LocationProvider } from "./src/context/LocationContext"
-import { TrackProvider } from "./src/context/TrackProvider"
+import { TrackProvider } from "./src/context/TrackContext"
 
 import { navigationRef } from './src/RootNavigation';
 

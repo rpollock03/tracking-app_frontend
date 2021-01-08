@@ -12,7 +12,6 @@ const Map = () => {
     const { currentLocation, locations } = useContext(LocationContext)
 
 
-
     if (!currentLocation) {
         return <ActivityIndicator size="large" style={{ marginTop: 200 }} />
     }
@@ -36,7 +35,10 @@ const Map = () => {
             strokeColor="rgb(158,158,255)"
             fillColor="rgba(158,158,255,0.3)"
         />
-        <Polyline coordinates={locations.map(loc => loc.coords)} />
+        <Polyline coordinates={locations.map(loc => loc.coords)}
+            strokeWidth={6}
+            strokeColor='#E5845C'
+        />
     </MapView>
 }
 
