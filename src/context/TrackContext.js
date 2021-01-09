@@ -11,10 +11,11 @@ export const TrackProvider = ({ children }) => {
 
     const fetchTracks = async () => {
         const response = await trackerApi.get("/tracks")
-        setTracks(response)
+        setTracks(response.data)
     }
 
     const createTrack = async (name, locations) => {
+        console.log("Saving: ", name, " - ", locations.length, " location points")
         await trackerApi.post("/tracks", { name, locations })
     }
 

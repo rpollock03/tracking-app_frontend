@@ -13,7 +13,7 @@ export default () => {
     const saveTrack = async () => {
         await createTrack(name, locations)
         reset()
-        RootNavigation.navigate('MainFlow')
+        RootNavigation.navigate('TrackListScreen')
     }
 
     return [saveTrack]
