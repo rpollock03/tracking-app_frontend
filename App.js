@@ -20,6 +20,7 @@ import { TrackProvider } from "./src/context/TrackContext"
 
 import { navigationRef } from './src/RootNavigation';
 
+import { Ionicons } from '@expo/vector-icons';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -34,7 +35,35 @@ function TrackFlow() {
 
 function MainFlow() {
   return (
-    <Tab.Navigator initialRouteName="TrackFlow">
+    <Tab.Navigator initialRouteName="TrackFlow"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === "TrackFlow") {
+            iconName = focused
+              ? "ios-home"
+              : "ios-home-outline"
+          } else if (route.name === "TrackCreate") {
+            iconName = focused
+              ? "add-circle"
+              : "add-circle-outline"
+          } else if (route.name === "Account") {
+            iconName = focused
+              ? "settings"
+              : "settings-outline"
+          }
+          return <Ionicons name={iconName} size={38} color="black" />
+        }
+      })}
+      tabBarOptions={{
+        showLabel: false,
+        style: {
+          height: "10%"
+        }
+      }}
+
+    >
       <Tab.Screen name="TrackFlow" component={TrackFlow} />
       <Tab.Screen name="TrackCreate" component={TrackCreateScreen} />
       <Tab.Screen name="Account" component={AccountScreen} />

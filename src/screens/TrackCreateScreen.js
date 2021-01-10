@@ -1,4 +1,4 @@
-import "../_mockLocation"
+//import "../_mockLocation"
 
 import React, { useContext, useCallback } from "react"
 import { StyleSheet, SafeAreaView } from "react-native"
@@ -35,7 +35,7 @@ const TrackCreateScreen = () => {
 
 
     return (<SafeAreaView>
-        <Text h2 style={{ textAlign: "center" }}>Create a Track</Text>
+        <Text h1 style={{ textAlign: "center" }}>Create a Track</Text>
         <Map />
         {err ? <Text>Please enable location services</Text> : null}
         <TrackForm />

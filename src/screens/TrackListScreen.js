@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react"
-import { StyleSheet, Text, Button, FlatList, TouchableOpacity } from "react-native"
+import { StyleSheet, Button, FlatList, TouchableOpacity, SafeAreaView } from "react-native"
 import TrackContext from "../context/TrackContext"
-import { ListItem, Avatar } from "react-native-elements"
-
+import { ListItem, Avatar, Text } from "react-native-elements"
+import { FontAwesome5 } from '@expo/vector-icons';
 
 const TrackListScreen = ({ navigation }) => {
 
@@ -16,8 +16,8 @@ const TrackListScreen = ({ navigation }) => {
         return unsubscribe;
     }, [navigation]);
 
-    return <>
-        <Text style={{ fontSize: 48 }}>TrackListScreen</Text>
+    return <SafeAreaView>
+        <Text h1 style={{ textAlign: "center" }}>My Tracks</Text>
         {tracks.length ? (<>
             <FlatList
                 keyExtractor={item => item._id}
@@ -28,7 +28,7 @@ const TrackListScreen = ({ navigation }) => {
                             navigation.navigate("TrackDetail", { _id: item._id })
                         }}>
                             <ListItem bottomDivider>
-                                <Avatar />
+                                <FontAwesome5 name="hiking" size={24} color="black" />
                                 <ListItem.Content>
                                     <ListItem.Title>{item.name}</ListItem.Title>
                                     <ListItem.Subtitle>Something</ListItem.Subtitle>
@@ -44,9 +44,7 @@ const TrackListScreen = ({ navigation }) => {
             />
         </>) : null}
 
-
-
-    </>
+    </SafeAreaView>
 }
 
 const styles = StyleSheet.create({
