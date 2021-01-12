@@ -28,7 +28,7 @@ const Tab = createBottomTabNavigator();
 function TrackFlow() {
   return (<Stack.Navigator initialRouteName="TrackListScreen" >
     <Tab.Screen name="TrackListScreen" component={TrackListScreen} options={{ headerShown: false }} />
-    <Stack.Screen name="TrackDetail" component={TrackDetailScreen} />
+    <Stack.Screen name="TrackDetail" component={TrackDetailScreen} options={{ headerShown: false }} />
   </Stack.Navigator>
   )
 }

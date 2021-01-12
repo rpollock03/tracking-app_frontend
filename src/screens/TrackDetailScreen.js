@@ -1,7 +1,8 @@
 import React, { useContext } from "react"
-import { View, StyleSheet, Text } from "react-native"
+import { View, StyleSheet, SafeAreaView } from "react-native"
+import { Text } from "react-native-elements"
 import TrackContext from "../context/TrackContext"
-import MapView, { Polyline } from "react-native-maps"
+import MapView, { Polyline, Marker } from "react-native-maps"
 
 const TrackDetailScreen = ({ route, navigation }) => {
 
@@ -15,8 +16,10 @@ const TrackDetailScreen = ({ route, navigation }) => {
     const track = tracks.find(t => t._id === _id)
     const initialCoords = track.locations[0].coords
 
-    return <>
-        <Text style={{ fontSize: 48 }}>{track.name}</Text>
+    return <SafeAreaView>
+
+
+        <Text h2 style={{ textAlign: "center" }}>{track.name} </Text>
         <MapView
             style={styles.map}
             initialRegion={{
@@ -25,9 +28,11 @@ const TrackDetailScreen = ({ route, navigation }) => {
                 ...initialCoords
             }}
         >
-            <Polyline coordinates={track.locations.map(loc => loc.coords)} />
+            <Polyline coordinates={track.locations.map(loc => loc.coords)} strokeWidth={6}
+                strokeColor='#E5845C' />
+            <Marker coordinate={initialCoords} pinColor="green" />
         </MapView>
-    </>
+    </SafeAreaView>
 }
 
 const styles = StyleSheet.create({
