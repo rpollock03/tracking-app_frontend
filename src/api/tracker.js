@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const instance = axios.create({
-    baseURL: "http://f5801fc2ba9d.ngrok.io"
+    baseURL: "http://2de94ee0ef77.ngrok.io"
 })
 
 // add auth token to every axios request

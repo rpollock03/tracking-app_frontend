@@ -1,5 +1,5 @@
-import React, { useContext } from "react"
-import { Input, Button } from "react-native-elements"
+import React, { useContext, useState } from "react"
+import { Input, Button, ButtonGroup } from "react-native-elements"
 import Spacer from "./Spacer"
 
 import { StyleSheet, View } from "react-native"
@@ -11,10 +11,17 @@ import { Entypo } from '@expo/vector-icons';
 
 const TrackForm = () => {
 
-    const { startRecording, stopRecording, changeName, name, reset, isRecording, locations } = useContext(LocationContext)
+    const { startRecording, stopRecording, changeName, name, changeCategory, category, reset, isRecording, locations } = useContext(LocationContext)
 
     const [saveTrack] = useSaveTrack()
 
+    const buttons = ["Walk", "Run", "Cycle", "Drive"]
+    const [selectedMethod, setSelectedMethod] = useState(1)
+
+    function updateIndex(index) {
+        setSelectedMethod(index)
+        changeCategory(buttons[index])
+    }
     return <>
         <Spacer>
             <Input
@@ -22,7 +29,18 @@ const TrackForm = () => {
                 onChangeText={changeName}
                 value={name}
             />
+            <ButtonGroup
+                onPress={updateIndex}
+                selectedIndex={selectedMethod}
+                buttons={buttons}
+                containerStyle={{ height: 50, borderRadius: 30 }}
+
+            />
+
         </Spacer>
+
+
+
 
         <Spacer>
             {!isRecording ? <Button title=" Start Recording" onPress={startRecording} icon={<Entypo name="controller-record" color="white" size={24} />} />

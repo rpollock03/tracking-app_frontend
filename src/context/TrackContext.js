@@ -14,9 +14,9 @@ export const TrackProvider = ({ children }) => {
         setTracks(response.data)
     }
 
-    const createTrack = async (name, locations) => {
+    const createTrack = async (name, locations, category, startingLocation) => {
         console.log("Saving: ", name, " - ", locations.length, " location points")
-        await trackerApi.post("/tracks", { name, locations })
+        await trackerApi.post("/tracks", { name, locations, category, startingLocation })
     }
 
     //children being App component, ie all components
