@@ -16,7 +16,7 @@ const TrackForm = () => {
     const [saveTrack] = useSaveTrack()
 
     const buttons = ["Walk", "Run", "Cycle", "Drive"]
-    const [selectedMethod, setSelectedMethod] = useState(1)
+    const [selectedMethod, setSelectedMethod] = useState(null)
 
     function updateIndex(index) {
         setSelectedMethod(index)

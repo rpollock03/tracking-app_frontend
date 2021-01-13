@@ -2,7 +2,7 @@
 
 import React, { useContext, useCallback } from "react"
 import { StyleSheet, SafeAreaView } from "react-native"
-import { Text } from "react-native-elements"
+import { Text, Header } from "react-native-elements"
 import { useIsFocused } from '@react-navigation/native';
 
 //Context and hooks
@@ -12,6 +12,8 @@ import useLocation from "../hooks/useLocation"
 //Components
 import TrackForm from "../components/TrackForm"
 import Map from "../components/Map"
+
+import { Entypo } from '@expo/vector-icons';
 
 
 const TrackCreateScreen = () => {
@@ -34,12 +36,16 @@ const TrackCreateScreen = () => {
 
 
 
-    return (<SafeAreaView>
-        <Text h1 style={{ textAlign: "center" }}>Create a Track</Text>
+    return (<>
+        <Header
+            centerComponent={{ text: 'Create a Track', style: { fontSize: 30, color: '#fff' } }}
+        />
+
         <Map />
         {err ? <Text>Please enable location services</Text> : null}
         <TrackForm />
-    </SafeAreaView>)
+    </>
+    )
 }
 
 const styles = StyleSheet.create({})
