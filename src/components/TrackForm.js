@@ -43,27 +43,26 @@ const TrackForm = () => {
 
 
         <Spacer>
-            {!isRecording ? <Button title=" Start Recording" onPress={startRecording} icon={<Entypo name="controller-record" color="white" size={24} />} />
-                : <Button title=" Stop Recording" buttonStyle={{
+            {!isRecording && !locations.length
+                ? <Button title=" Start Recording" onPress={startRecording} icon={<Entypo name="controller-record" color="white" size={24} />} />
+                : null}
+            {isRecording
+                ? <Button title=" Stop Recording" buttonStyle={{
                     backgroundColor: "red"
-                }} icon={<Entypo name="controller-stop" size={24} color="white" />} onPress={stopRecording} />}
-        </Spacer>
-        <Spacer>
-            {!isRecording && locations.length ?
-                <View style={styles.buttonRow}>
+                }} icon={<Entypo name="controller-stop" size={24} color="white" />} onPress={stopRecording} />
+                : null
+            }
+            {!isRecording && locations.length
+                ? <View style={styles.buttonRow}>
                     <Button title=" Save" buttonStyle={{
-                        width: 170
+                        width: 150
                     }} onPress={saveTrack} icon={<Entypo name="save" size={24} color="white" />} />
                     <Button title=" Clear" buttonStyle={{
-                        backgroundColor: "red", width: 170
+                        backgroundColor: "red", width: 150
                     }} onPress={reset} icon={<Entypo name="cross" size={24} color="white" />} />
                 </View>
-
                 : null}
         </Spacer>
-
-
-
     </>
 }
 
