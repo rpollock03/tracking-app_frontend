@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react"
 import { StyleSheet, Button, FlatList, TouchableOpacity, SafeAreaView } from "react-native"
 import TrackContext from "../context/TrackContext"
-import { ListItem, Avatar, Text } from "react-native-elements"
+import { ListItem, Avatar, Text, Header } from "react-native-elements"
 import { FontAwesome5 } from '@expo/vector-icons';
 
 const TrackListScreen = ({ navigation }) => {
@@ -40,8 +40,11 @@ const TrackListScreen = ({ navigation }) => {
     }
 
 
-    return <SafeAreaView>
-        <Text h1 style={{ textAlign: "center" }}>My Tracks</Text>
+    return <>
+        <Header
+            centerComponent={{ text: 'My tracks', style: { fontSize: 30, color: '#fff' } }}
+        />
+
         {tracks.length ? (<>
             <FlatList
                 keyExtractor={item => item._id}
@@ -69,7 +72,7 @@ const TrackListScreen = ({ navigation }) => {
             />
         </>) : null}
 
-    </SafeAreaView>
+    </>
 }
 
 const styles = StyleSheet.create({

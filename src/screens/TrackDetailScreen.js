@@ -1,8 +1,10 @@
 import React, { useContext } from "react"
 import { View, StyleSheet, SafeAreaView } from "react-native"
-import { Text } from "react-native-elements"
+import { Text, Header, Button } from "react-native-elements"
 import TrackContext from "../context/TrackContext"
 import MapView, { Polyline, Marker } from "react-native-maps"
+import Spacer from "../components/Spacer"
+import * as geolib from 'geolib';
 
 const TrackDetailScreen = ({ route, navigation }) => {
 
@@ -16,10 +18,10 @@ const TrackDetailScreen = ({ route, navigation }) => {
     const track = tracks.find(t => t._id === _id)
     const initialCoords = track.locations[0].coords
 
-    return <SafeAreaView>
-
-
-        <Text h2 style={{ textAlign: "center" }}>{track.name} </Text>
+    return <>
+        <Header
+            centerComponent={{ text: track.name, style: { fontSize: 30, color: '#fff' } }}
+        />
         <MapView
             style={styles.map}
             initialRegion={{
@@ -28,11 +30,21 @@ const TrackDetailScreen = ({ route, navigation }) => {
                 ...initialCoords
             }}
         >
+
+
             <Polyline coordinates={track.locations.map(loc => loc.coords)} strokeWidth={6}
                 strokeColor='#E5845C' />
             <Marker coordinate={initialCoords} pinColor="green" />
         </MapView>
-    </SafeAreaView>
+        <Spacer>
+            <Text>{geolib.getPathLength(track.locations.map(loc => loc.coords))}</Text>
+        </Spacer>
+        <Spacer>
+            <Button title="Delete Track" buttonStyle={{
+                backgroundColor: "red"
+            }} onPress={console.log("something")} />
+        </Spacer>
+    </>
 }
 
 const styles = StyleSheet.create({
