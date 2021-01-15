@@ -9,7 +9,7 @@ import * as geolib from 'geolib';
 const TrackDetailScreen = ({ route, navigation }) => {
 
     // get all tracks from context
-    const { tracks } = useContext(TrackContext)
+    const { tracks, deleteTrack } = useContext(TrackContext)
 
     //get track id in question from navigation params passed
     const { _id } = route.params
@@ -37,12 +37,12 @@ const TrackDetailScreen = ({ route, navigation }) => {
             <Marker coordinate={initialCoords} pinColor="green" />
         </MapView>
         <Spacer>
-            <Text>{geolib.getPathLength(track.locations.map(loc => loc.coords))}</Text>
+            <Text h4>You walked {geolib.getPathLength(track.locations.map(loc => loc.coords))} meters</Text>
         </Spacer>
         <Spacer>
             <Button title="Delete Track" buttonStyle={{
                 backgroundColor: "red"
-            }} onPress={console.log("something")} />
+            }} onPress={() => deleteTrack(_id)} />
         </Spacer>
     </>
 }

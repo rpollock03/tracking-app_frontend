@@ -19,8 +19,13 @@ export const TrackProvider = ({ children }) => {
         await trackerApi.post("/tracks", { name, locations, category, startingLocation })
     }
 
+    const deleteTrack = async (id) => {
+        console.log("deleting", id)
+        await trackerApi.delete("/tracks", { id })
+    }
+
     //children being App component, ie all components
-    return <TrackContext.Provider value={{ fetchTracks, tracks, createTrack }}>
+    return <TrackContext.Provider value={{ fetchTracks, tracks, createTrack, deleteTrack }}>
         {children}
     </TrackContext.Provider>
 }
