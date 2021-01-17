@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import trackerApi from "../api/tracker"
 
-
 const TrackContext = React.createContext()
 
 
@@ -15,13 +14,12 @@ export const TrackProvider = ({ children }) => {
     }
 
     const createTrack = async (name, locations, category, startingLocation) => {
-        console.log("Saving: ", name, " - ", locations.length, " location points")
         await trackerApi.post("/tracks", { name, locations, category, startingLocation })
     }
 
     const deleteTrack = async (id) => {
-        console.log("deleting", id)
-        await trackerApi.delete("/tracks", { id })
+        await trackerApi.delete("/tracks", { data: { id } })
+
     }
 
     //children being App component, ie all components

@@ -1,7 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useState } from "react"
 import trackerApi from "../api/tracker"
-
 import * as RootNavigation from '../RootNavigation'
 
 const AuthContext = React.createContext()
@@ -14,8 +13,8 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async ({ email, password }) => {
         try {
-            //should return our JSON Web Token JWT
-            const response = await trackerApi.post("/signup", { email, password })
+
+            const response = await trackerApi.post("/signup", { email, password }) //should return JSON Web Token
             await AsyncStorage.setItem('token', response.data.token)
             setToken(response.data.token)
             RootNavigation.navigate('MainFlow')
@@ -27,7 +26,6 @@ export const AuthProvider = ({ children }) => {
 
     const signin = async ({ email, password }) => {
         try {
-            //should return our JSON Web Token JWT
             const response = await trackerApi.post("/signin", { email, password })
             await AsyncStorage.setItem('token', response.data.token)
             setToken(response.data.token)
@@ -58,7 +56,7 @@ export const AuthProvider = ({ children }) => {
         RootNavigation.navigate("Signin")
     }
 
-    //children being App component, ie all components
+    // children == App
     return <AuthContext.Provider value={{ token, signup, signin, signout, errorMessage, clearErrors, tryLocalSignIn }}>
         {children}
     </AuthContext.Provider>

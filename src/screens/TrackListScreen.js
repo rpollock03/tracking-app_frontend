@@ -1,8 +1,9 @@
-import React, { useContext, useEffect } from "react"
-import { StyleSheet, Button, FlatList, TouchableOpacity, SafeAreaView } from "react-native"
+import React, { useContext } from "react"
+import { FlatList, TouchableOpacity } from "react-native"
 import TrackContext from "../context/TrackContext"
-import { ListItem, Avatar, Text, Header } from "react-native-elements"
+import { ListItem, Header } from "react-native-elements"
 import { FontAwesome5 } from '@expo/vector-icons';
+
 
 const TrackListScreen = ({ navigation }) => {
 
@@ -14,8 +15,7 @@ const TrackListScreen = ({ navigation }) => {
         });
 
         return unsubscribe;
-    }, [navigation]);
-
+    }, [navigation, tracks]);
 
     function getDate(timestamp) {
         let date = new Date(timestamp)
@@ -33,12 +33,15 @@ const TrackListScreen = ({ navigation }) => {
     }
 
 
+
     function getIcon(category) {
-        if (category == "Behdhdhsd") icon = "car-alt"
-        else icon = "hiking"
+        let icon = ""
+        if (category == "Drive") icon = "car"
+        if (category == "Cycle") icon = "bicycle"
+        if (category == "Walk") icon = "hiking"
+        if (category == "Run") icon = "running"
         return icon
     }
-
 
     return <>
         <Header
@@ -65,19 +68,11 @@ const TrackListScreen = ({ navigation }) => {
                             </ListItem>
                         </TouchableOpacity>
                     </>
-
                 }}
-
                 extraData={tracks}
             />
         </>) : null}
-
     </>
 }
-
-const styles = StyleSheet.create({
-
-
-})
 
 export default TrackListScreen

@@ -2,9 +2,7 @@ import React, { useContext } from "react"
 import { View, StyleSheet, TouchableOpacity } from "react-native"
 import { Text } from "react-native-elements"
 import AuthForm from "../components/AuthForm"
-
 import Spacer from "../components/Spacer"
-
 import AuthContext from "../context/AuthContext"
 
 const SigninScreen = ({ navigation }) => {

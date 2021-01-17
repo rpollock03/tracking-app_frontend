@@ -5,13 +5,7 @@ import LocationContext from "../context/LocationContext"
 import * as RootNavigation from '../RootNavigation'
 const GEOCODE_KEY = "pk.2519660cd5025934433bffdaa2cf8eb4"
 
-
-
-
-//process.env.REACT_APP_GEOCODE_API_KEY
-
 export default () => {
-
 
     const { createTrack } = useContext(TrackContext)
     const { locations, name, category, reset } = useContext(LocationContext)

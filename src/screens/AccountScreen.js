@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native"
 import { Button, Text, Header } from 'react-native-elements'
 import { View } from "react-native"
 import Spacer from "../components/Spacer"
-
 import AuthContext from "../context/AuthContext"
 
 
 const AccountScreen = () => {
 
     const { signout } = useContext(AuthContext)
+
     return <>
         <Header
             centerComponent={{ text: 'My Account', style: { fontSize: 30, color: '#fff' } }}
@@ -27,7 +27,6 @@ const AccountScreen = () => {
                 }} onPress={console.log("something")} />
             </Spacer>
         </View>
-
     </>
 }
 

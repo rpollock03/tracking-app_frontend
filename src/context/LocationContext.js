@@ -19,7 +19,6 @@ export const LocationProvider = ({ children }) => {
         //update current location on map
         setCurrentLocation(newLocation)
         //only store list of locations if recording
-
         if (recording) {
             setLocations(locations => [...locations, newLocation])
         }
@@ -42,7 +41,6 @@ export const LocationProvider = ({ children }) => {
         setLocations([])
         setCategory("")
     }
-
 
     //children being App component, ie all components
     return <LocationContext.Provider value={{ startRecording, stopRecording, addLocation, changeName, reset, changeCategory, category, locations, currentLocation, name, isRecording, }}>

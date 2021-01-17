@@ -3,12 +3,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
 const instance = axios.create({
-    baseURL: "https://adb7426f9476.ngrok.io"
+    baseURL: "http://05fd44a5f2b4.ngrok.io"
 })
 
 // add auth token to every axios request
 instance.interceptors.request.use(
-    //first argument - function called everytime we make request
     async (config) => {
         const token = await AsyncStorage.getItem("token")
         if (token) {
@@ -16,9 +15,8 @@ instance.interceptors.request.use(
         }
         return config
     },
-    //second argument - function called everytime there is an error
+    // if error
     (err) => {
-
         return Promise.reject(err)
     }
 )
