@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react"
-import { View, StyleSheet, SafeAreaView } from "react-native"
+import { StyleSheet, SafeAreaView } from "react-native"
 import { Text, Header, Button } from "react-native-elements"
 import TrackContext from "../context/TrackContext"
 import MapView, { Polyline, Marker } from "react-native-maps"
 import Spacer from "../components/Spacer"
 import * as geolib from 'geolib';
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const TrackDetailScreen = ({ route, navigation }) => {
 
@@ -55,7 +57,8 @@ const TrackDetailScreen = ({ route, navigation }) => {
                 <Marker coordinate={initialCoords} pinColor="green" />
             </MapView>
             <Spacer>
-                <Text h4>On {getDate(track.locations[0].timestamp)}, you went for a {geolib.getPathLength(track.locations.map(loc => loc.coords))} meter {track.category.toLowerCase()}.</Text>
+                <Text h4><MaterialCommunityIcons name="calendar-clock" size={24} color="black" /> {getDate(track.locations[0].timestamp)}</Text>
+                <Text h4><MaterialCommunityIcons name="map-marker-distance" size={24} color="black" /> {geolib.getPathLength(track.locations.map(loc => loc.coords))} meter {track.category.toLowerCase()}</Text>
             </Spacer>
             <Spacer>
                 <Button title="Delete Track" buttonStyle={{
